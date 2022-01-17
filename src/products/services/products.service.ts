@@ -3,7 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Product } from './../entities/product.entity';
-import { CreateProductDto, UpdateProductDto } from './../dtos/products.dtos';
+import {
+  CreateProductDto,
+  UpdateProductDto,
+  FilterProductsDto,
+} from './../dtos/products.dtos';
 
 @Injectable()
 export class ProductsService {
@@ -11,8 +15,23 @@ export class ProductsService {
     @InjectModel(Product.name) private productModel: Model<Product>,
   ) {}
 
-  findAll() {
-    return this.productModel.find().exec();
+  async findAll(params?: FilterProductsDto) {
+    const count = await this.productModel.countDocuments().exec();
+
+    if (params) {
+      const { limit, offset } = params;
+      const results = await this.productModel
+        .find()
+        .limit(limit)
+        .skip(offset)
+        .exec();
+
+      return { results, count };
+    }
+
+    const results = this.productModel.find().exec();
+
+    return { results, count };
   }
 
   async findOne(id: string) {
