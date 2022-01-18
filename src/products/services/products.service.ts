@@ -22,6 +22,7 @@ export class ProductsService {
       const { limit, offset } = params;
       const results = await this.productModel
         .find()
+        .populate('brand')
         .limit(limit)
         .skip(offset)
         .exec();
@@ -29,13 +30,16 @@ export class ProductsService {
       return { results, count };
     }
 
-    const results = this.productModel.find().exec();
+    const results = this.productModel.find().populate('brand').exec();
 
     return { results, count };
   }
 
   async findOne(id: string) {
-    const product = await this.productModel.findById(id).exec();
+    const product = await this.productModel
+      .findById(id)
+      .populate('brand')
+      .exec();
 
     if (!product) {
       throw new NotFoundException(`Product #${id} not found`);
