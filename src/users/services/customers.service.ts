@@ -12,11 +12,11 @@ export class CustomersService {
   ) {}
 
   findAll() {
-    return this.customerModel.find().exec();
+    return this.customerModel.find().populate('skills').exec();
   }
 
   async findOne(id: string) {
-    return this.customerModel.findById(id);
+    return this.customerModel.findById(id).populate('skills');
   }
 
   create(data: CreateCustomerDto) {
