@@ -54,15 +54,9 @@ export class ProductsService {
   }
 
   update(id: string, changes: UpdateProductDto) {
+    // The new:true value returns the updated product
     const product = this.productModel
-      .findByIdAndUpdate(
-        id,
-        {
-          $set: changes,
-        },
-        // This return the updated product
-        { new: true },
-      )
+      .findByIdAndUpdate(id, { $set: changes }, { new: true })
       .exec();
 
     if (!product) {

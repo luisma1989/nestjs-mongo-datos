@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
 import { AuthModule } from './auth/auth.module';
+import { ArticleModule } from './article/article.module';
 import config from './config';
 
 @Module({
@@ -18,7 +19,6 @@ import config from './config';
       load: [config],
       isGlobal: true,
       validationSchema: Joi.object({
-        API_KEY: Joi.number().required(),
         DATABASE_NAME: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
       }),
@@ -28,6 +28,7 @@ import config from './config';
     ProductsModule,
     DatabaseModule,
     AuthModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [

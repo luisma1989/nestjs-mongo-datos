@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-import { SubDoc, SubDocSchema } from './sub-doc.entity'; // 👈 import
+import { SubDoc, SubDocSchema } from './sub-doc.entity';
 import { Brand } from './brand.entity';
 
 @Schema()
