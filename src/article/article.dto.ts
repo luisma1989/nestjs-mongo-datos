@@ -1,12 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+
 // A DTO is an object that defines how the data will be sent over the network.
 // We could determine the DTO schema by using TypeScript interfaces, or by
 // simple classes. Interestingly, we recommend using classes here.
+
 export class ArticleDto {
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ description: `product's name` })
+  type_of: string;
+
+  @IsString()
+  @IsNotEmpty()
   @ApiProperty({
     description: 'The title of the article.',
     required: true,
@@ -24,18 +29,66 @@ export class ArticleDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
-    description: 'The author of the article.',
+    description: 'The summary of the article.',
     required: true,
   })
   summary: string;
 
   @IsNumber()
-  @ApiProperty()
+  @IsOptional()
   commentCount: number;
 
   @IsNumber()
-  @ApiProperty()
+  @IsOptional()
   viewsCount: number;
 
-  // tags: string[];
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Author of the article.',
+    required: true,
+  })
+  author: string;
+
+  @IsString()
+  @IsNotEmpty()
+  coverImage: string;
+
+  @IsString()
+  @IsOptional()
+  socialImage: string;
+
+  @IsOptional()
+  readable_publish_date: string;
+
+  tags: string[];
+
+  tag_list: string;
+
+  @IsString()
+  @IsOptional()
+  url: string;
+
+  @IsNumber()
+  @IsOptional()
+  positiveReactionsCount: number;
+
+  @IsNumber()
+  @IsOptional()
+  publicReactionsCount: number;
+
+  createdAt: string;
+
+  editedAt: string;
+
+  publishedAt: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  readingTimeMinutes: number;
+
+  body_html: string;
+
+  @IsString()
+  body_markdown: string;
 }
