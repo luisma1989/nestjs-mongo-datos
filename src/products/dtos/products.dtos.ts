@@ -44,24 +44,24 @@ export class CreateProductDto {
   @ApiProperty()
   readonly image: string;
 
-  @IsNotEmpty()
-  @ValidateNested()
-  @ApiProperty()
-  readonly category: CreateCategoryDto;
+  // @IsNotEmpty()
+  // @ValidateNested()
+  // @ApiProperty()
+  // readonly category: CreateCategoryDto;
 
   @IsNotEmpty()
   @IsMongoId()
   readonly brand: string;
 
-  @IsNotEmpty()
-  @ValidateNested()
-  readonly subDoc: CreateSubDocDto;
+  // @IsNotEmpty()
+  // @ValidateNested()
+  // readonly subDoc: CreateSubDocDto;
 
-  @IsNotEmpty()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateSubDocDto)
-  readonly subDocs: CreateSubDocDto[];
+  // @IsNotEmpty()
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateSubDocDto)
+  // readonly subDocs: CreateSubDocDto[];
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {}
